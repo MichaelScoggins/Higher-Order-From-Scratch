@@ -64,29 +64,46 @@ console.log("Eligible for MassGain regimen:", filterEngine(weightTotals, underWe
 const benchPressRegimen = [105, 135, 155, 185]
 //utility function
 const benchPressIncrease = (x => x * 1.5)
-//.map() function
+
+//.map() function (i later realized i used .map within .map so SEE BELOW)
+// const mapEngine = (arr, func) => {
+//   let newArray = []
+//   let len = arr.length
+//   for(let i = 0; i != len; i++) {    
+//     newArray.push(func(arr[i]))     
+//   }
+//   return newArray.map(x => Math.ceil(x/5)*5)
+// }
+
+//.map() function WITHOUT USING .MAP() TO ROUND RESULTS
 const mapEngine = (arr, func) => {
   let newArray = []
   let len = arr.length
   for (let i = 0; i != len; i++) {
-    newArray.push(func(arr[i]))
+    item = arr[i]
+    newArray.push(func(item))
   }
-  return newArray.map(x => Math.ceil(x / 5) * 5)
+  let newestArray = []
+  for (let i = 0; i != newArray.length; i++) {
+    rounded = Math.ceil(newArray[i] / 5) * 5
+    newestArray.push(rounded)
+  }
+  return newestArray
 }
+
 //proof of concept
 console.log("Benchpress pyramid 1-year target:", mapEngine(benchPressRegimen, benchPressIncrease))
 console.log("~~~~~~~~~~~~ASSIGNMENT END~~~~~~~~~~~~~~")
 
 
 console.log("~~~~~BONUS~~~~~~~BONUS~~~~~~~BONUS~~~~~~~")
-
 /////******BONUS .filter() from scratch BONUS using key-value pairs BONUS*****/////
 
-//i included this as optional because i wasn't sure if it would have satisfied the actual assignment's requirements (even tho it's <i>objectively</i> better...)
+//i included this as optional because i wasn't sure if it would have satisfied the actual assignment's requirements (even tho it's <i>object</i>ively better...)
 
-// .filter() function that takes an //object of key-value pairs// and a function that returns an array with only the //keys// that return true in the function.
+// .filter() function that takes an //object of key-value pairs// and a function that returns an array with only the //keys// //whose properties// return true in the function.
 
-//data sample// (i decided i wanted to see how to do this with objects as well as arrays and it took me forever to finally get it)
+//data sample// (i decided i wanted to see how to do this with objects as well as arrays (since i'm struggling so much with this stuff) and it took me forever to finally get it but here it is)
 const weightTotals1 = {
   austin: 198,
   ben: 194,
@@ -107,7 +124,7 @@ const weightTotals1 = {
 console.log("Weight Totals", weightTotals1)
 //utility function
 const underWeight1 = (x => x < 200)
-// .filter() function
+//.filter() function
 const filterEngine1 = (obj, func) => {
   let poop = obj
   let newArray = []
@@ -116,7 +133,7 @@ const filterEngine1 = (obj, func) => {
     if (func(poop[property])) {
       newArray.push(property)
     }
-    // clayton if you're reading this i just want you to know the moment i chose to call it poop (with some other hopeful changes... after hours of nigh-hopeless meandering), it finally worked.
+    // clayton if you're reading this i just want you to know the moment i chose to call it poop (with one or two other hopeful changes... after hours of nigh-hopeless meandering), it finally worked.
   }
   return newArray
 }
