@@ -29,7 +29,7 @@ const reducerEngine = (func, arr, num) => {
   for (let i = 0; i != len; i++) {
     accumulator = func(accumulator, arr[i])
   }
-  return accumulator.toFixed(2)
+  return accumulator.toFixed(2) 
 }
 //proof of concept
 console.log("foodOrders_revenue/today: " + "$" + reducerEngine(addTogether, foodOrders))
